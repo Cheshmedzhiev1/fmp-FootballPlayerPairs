@@ -2,11 +2,9 @@ package com.football.fmp.domain.service;
 
 import com.football.fmp.domain.model.PlayerPairResult;
 import com.football.fmp.domain.model.Record;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service
 public class PlayerPairAnalyzer {
 
     public PlayerPairResult findLongestPlayingPair(

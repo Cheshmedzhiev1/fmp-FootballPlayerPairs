@@ -19,8 +19,9 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":data"))
-    implementation(project(":client"))
+    implementation(project(":application"))
+    implementation(project(":inbound-adapters"))
+    implementation(project(":outbound-adapters"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

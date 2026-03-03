@@ -1,6 +1,8 @@
 rootProject.name = "fmp-football"
 
 include("domain")
-include("data")
+include("application")
+include("inbound-adapters")
+include("outbound-adapters")
 include("server")
 include("client")
