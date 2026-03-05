@@ -12,3 +12,6 @@ public interface ForPlayer {
     Player update(Long id, Player player);
     boolean deleteById(Long id);
 }
+
+// driving port
+// implemented by PlayerApplicationService, called by PlayerController

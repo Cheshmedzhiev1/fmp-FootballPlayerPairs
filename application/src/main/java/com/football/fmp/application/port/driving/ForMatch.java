@@ -12,3 +12,6 @@ public interface ForMatch {
     Match update(Long id, Match match);
     boolean deleteById(Long id);
 }
+
+// driving port
+// implemented by -> MatchAppService, TeamAppService, RecordAppService , called by -> their respective REST controller

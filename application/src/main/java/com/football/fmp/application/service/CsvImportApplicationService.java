@@ -18,3 +18,6 @@ public class CsvImportApplicationService implements ForImportCsvData {
         csvImportDrivenPort.importFromDirectory(directoryPath);
     }
 }
+
+
+ // imports all the csv's to our directory  -> this is a driving port

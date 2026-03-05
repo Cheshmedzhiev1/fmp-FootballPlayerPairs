@@ -1,7 +1,9 @@
 package com.football.fmp.inbound.adapters.rest;
 
+import com.football.fmp.application.port.driving.ForFindLongestPlayingPair;
 import com.football.fmp.application.port.driving.ForPlayer;
 import com.football.fmp.domain.model.Player;
+import com.football.fmp.domain.model.PlayerPairResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +16,11 @@ public class PlayerController {
 
     private final ForPlayer forPlayer;
 
-    public PlayerController(ForPlayer forPlayer) {
+    private final ForFindLongestPlayingPair forFindLongestPlayingPair;
+
+    public PlayerController(ForPlayer forPlayer, ForFindLongestPlayingPair forFindLongestPlayingPair) {
         this.forPlayer = forPlayer;
+        this.forFindLongestPlayingPair = forFindLongestPlayingPair;
     }
 
     @PostMapping
@@ -48,5 +53,16 @@ public class PlayerController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+
+
+    @GetMapping("/longest")
+    public ResponseEntity<PlayerPairResult> getLongestPlayingPair() {
+        PlayerPairResult result = forFindLongestPlayingPair.findLongestPlayingPair();
+        if (result == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(result);
     }
 }

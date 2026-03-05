@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class MatchApplicationService implements ForMatch {
 
-    private final MatchDrivenPort matchDrivenPort;
+    private final MatchDrivenPort matchDrivenPort;   // application service implements the matchDrivenPort and sets its behaviour
 
     public MatchApplicationService(MatchDrivenPort matchDrivenPort) {
         this.matchDrivenPort = matchDrivenPort;

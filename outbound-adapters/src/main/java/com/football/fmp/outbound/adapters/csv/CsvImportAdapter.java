@@ -36,6 +36,10 @@ public class CsvImportAdapter implements CsvImportDrivenPort {
 
     @Override
     public void importFromDirectory(String directoryPath) throws Exception {
+        if (recordJpaRepository.count() > 0) {
+            LOGGER.info("Data already exists in the database, skipping csv import");
+            return;
+        }
         LOGGER.info("Loading CSV data from {}", directoryPath);
 
         Path teamsPath = Paths.get(directoryPath, "teams.csv");

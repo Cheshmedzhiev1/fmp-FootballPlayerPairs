@@ -12,3 +12,7 @@ public interface ForTeam {
     Team update(Long id, Team team);
     boolean deleteById(Long id);
 }
+
+
+// driving port
+// implemented by -> MatchAppService, TeamAppService, RecordAppService , called by -> their respective REST controller
