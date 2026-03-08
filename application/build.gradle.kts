@@ -16,6 +16,10 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(project(":domain"))  // brings core spring framework, minimal spring dependency, not full spring boot
     implementation("org.springframework:spring-context:6.1.4")
 }
+
+
+// no spring boot, no JPA, no web/rest dependencies
+// this module only needs to know about the domain and basic spring wiring.

@@ -12,15 +12,15 @@ java {
 }
 
 repositories {
-    mavenCentral()
+    mavenCentral() // tells gradle where to download dependencies from
 }
 
-dependencies {
+dependencies {  // j unit available during testing, not included in final build
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-tasks.withType<Test> {
+tasks.withType<Test> {  // tells gradle to use junit 5 to discover and run tests
     useJUnitPlatform()
     testLogging {
         events("passed", "failed", "skipped")

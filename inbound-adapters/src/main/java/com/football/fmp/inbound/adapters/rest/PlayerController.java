@@ -23,12 +23,12 @@ public class PlayerController {
         this.forFindLongestPlayingPair = forFindLongestPlayingPair;
     }
 
-    @PostMapping
+    @PostMapping //sends new data -create
     public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
         return ResponseEntity.status(HttpStatus.CREATED).body(forPlayer.create(player));
     }
 
-    @GetMapping
+    @GetMapping // retrieves data -read
     public ResponseEntity<List<Player>> getAllPlayers() {
         return ResponseEntity.ok(forPlayer.findAll());
     }
@@ -38,7 +38,7 @@ public class PlayerController {
         return forPlayer.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") // modify existing data -update
     public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody Player player) {
         Player updated = forPlayer.update(id, player);
         if (updated == null) {
@@ -47,7 +47,7 @@ public class PlayerController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") //remove data -delete
     public ResponseEntity<Void> deletePlayer(@PathVariable Long id) {
         if (!forPlayer.deleteById(id)) {
             return ResponseEntity.notFound().build();
@@ -58,10 +58,10 @@ public class PlayerController {
 
 
     @GetMapping("/longest")
-    public ResponseEntity<PlayerPairResult> getLongestPlayingPair() {
-        PlayerPairResult result = forFindLongestPlayingPair.findLongestPlayingPair();
-        if (result == null) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<List<PlayerPairResult>> getLongestPlayingPair() {
+        List<PlayerPairResult> result = forFindLongestPlayingPair.findLongestPlayingPair();
+        if (result.isEmpty()) {
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(result);
     }

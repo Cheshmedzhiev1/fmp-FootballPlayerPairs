@@ -16,7 +16,7 @@ java {
 repositories {
     mavenCentral()
 }
-
+// the .kts that runs the application
 dependencies {
     implementation(project(":domain"))
     implementation(project(":application"))
@@ -28,7 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.postgresql:postgresql")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test") // adds testing support for the server level
 }
 
 tasks.test {

@@ -8,9 +8,6 @@ import com.football.fmp.domain.service.PlayerPairAnalyzer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-// loads all the records from the database via RecordDrivenPort, loads all players via PlayerDrivenPort,
-// builds a map of playerid -> teamid , then calls PlayerPairAnalyzer
-// the analyzer needs to know which team each player belongs to so it only pairs teammates
 
 @Service
 public class PlayerPairApplicationService implements ForFindLongestPlayingPair {
@@ -18,14 +15,25 @@ public class PlayerPairApplicationService implements ForFindLongestPlayingPair {
     private final RecordDrivenPort recordDrivenPort;
     private final PlayerPairAnalyzer playerPairAnalyzer;
 
+    // true -sql query is executed ,  false -we run the analyzer algo
+    private static final boolean USE_SQL_QUERY = false;
+
     public PlayerPairApplicationService(RecordDrivenPort recordDrivenPort) {
         this.recordDrivenPort = recordDrivenPort;
         this.playerPairAnalyzer = new PlayerPairAnalyzer();
     }
 
     @Override
-    public PlayerPairResult findLongestPlayingPair() {
-        List<Record> records = recordDrivenPort.findAll();
-        return playerPairAnalyzer.findLongestPlayingPair(records);
+    public List<PlayerPairResult> findLongestPlayingPair() {
+        if (USE_SQL_QUERY) {
+            List<PlayerPairResult> results = recordDrivenPort.findLongestPlayingPair();
+            if (results == null || results.isEmpty()) {
+                return List.of();
+            }
+            return results;
+        } else {
+            List<Record> records = recordDrivenPort.findAll();
+            return playerPairAnalyzer.findLongestPlayingPair(records);
+        }
     }
 }

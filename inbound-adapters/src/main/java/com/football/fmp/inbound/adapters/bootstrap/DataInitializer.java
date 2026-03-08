@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
-
+// runs automatically when the spring  boot app starts, loads all the csv data into the database before any hhtp request arrives
 @Component
 public class DataInitializer implements CommandLineRunner {
 
